@@ -1,0 +1,96 @@
+package ${package}.${moduleName}.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.rongji.dfish.base.Pagination;
+import com.rongji.dfish.base.util.Utils;
+import com.rongji.dfish.frame.pub.controller.FrameController;
+import com.rongji.dfish.framework.mvc.response.JsonResponse;
+import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.param.${className}QueryParam;
+import ${package}.${moduleName}.service.${className}Service;
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@RequestMapping("${classname}")
+@Controller
+public class ${className}Controller extends FrameController{
+
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+
+    /**
+     * 根据主键获取数据
+     */
+    @RequestMapping("/get")
+    @ResponseBody
+    public Object get(HttpServletRequest request) {
+
+        String ${pk.attrname} = request.getParameter("${pk.attrname}");
+
+        ${className}Model model = ${classname}Service.get(${pk.attrname});
+
+        return new JsonResponse(model);
+    }
+
+
+    /**
+     * 获取列表数据
+     */
+    @RequestMapping("/list")
+    @ResponseBody
+    public Object list(HttpServletRequest request) throws Exception {
+        Pagination pagination = this.getPagination(request);
+        ${className}QueryParam param = new ${className}QueryParam();
+        this.bind(request, param);
+        List<${className}Model> list = ${classname}Service.list(pagination, param);
+        return new JsonResponse(list, pagination);
+    }
+
+
+    /**
+     * 增加/修改
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public Object save(HttpServletRequest request) throws Exception {
+        String ${pk.attrname} = request.getParameter("${pk.attrname}");
+        ${className}Model model = new ${className}Model();
+        this.bind(request, model);
+        if (Utils.isEmpty(${pk.attrname})) {
+           // 保存
+           ${classname}Service.save(model);
+        } else {
+           // 修改
+           ${classname}Service.update(model);
+        }
+        return new JsonResponse(model);
+    }
+
+
+    /**
+     * 删除
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Object delete(HttpServletRequest request) throws Exception {
+        String ${pk.attrname} = request.getParameter("${pk.attrname}");
+        int result = ${classname}Service.delete(${pk.attrname});
+        return new JsonResponse(result);
+    }
+
+}
