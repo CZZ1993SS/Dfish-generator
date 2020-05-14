@@ -1,17 +1,52 @@
 package ${package}.${moduleName}.dao;
 
-import ${package}.${moduleName}.entity.${className}Entity;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.rongji.dfish.base.Pagination;
+import com.rongji.dfish.base.util.Utils;
+import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.param.${className}QueryParam;
+
+import com.rongji.dfish.frame.pub.dao.FrameDao;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ${comments}
- * 
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
-@Mapper
-public interface ${className}Dao extends BaseMapper<${className}Entity> {
-	
+@Component
+public class ${className}Dao extends FrameDao<${className}, String> {
+
+
+    /**
+     *  列表查询
+     */
+    public List<${className}> list${className}s(Pagination page, ${className}QueryParam param) {
+
+        List<Object> params = new ArrayList();
+
+        StringBuilder hql = new StringBuilder("FROM ${className} t ");
+
+        #foreach($column in $columns)
+            #if($column.attrType=='String')
+                // ${column.comments}
+                if (Utils.notEmpty(param.get${column.attrName}())) {
+                    hql.append("AND t.${column.attrname} = ?");
+                    params.add(param.get${column.attrName}());
+                }
+            #else
+                // ${column.comments}
+                if (param.get${column.attrName}() != null) {
+                    hql.append("AND t.${column.attrname} = ?");
+                    params.add(param.get${column.attrName}());
+                }
+            #end
+        #end
+
+        return this.queryForList(hql.toString().replaceFirst("AND", "WHERE"), page, params.toArray());
+    }
+
+
 }
