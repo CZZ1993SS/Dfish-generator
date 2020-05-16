@@ -3,8 +3,8 @@ package ${package}.${moduleName}.entity;
 import java.math.BigDecimal;
 import javax.persistence.*;
 
-#if(${hasBigDecimal})
-#end
+    #if(${hasBigDecimal})
+    #end
 import java.util.Date;
 
 /**
@@ -18,27 +18,27 @@ import java.util.Date;
 public class ${className} {
 
 #foreach ($column in $columns)
-	/**
-	 * $column.comments
-	 */
+/**
+ * $column.comments
+ */
 private $column.attrType $column.attrname;
 #end
 
-    public ${className}() {}
+public ${className}(){}
 
 #foreach ($column in $columns)
 
 /**
  * $column.comments
  */
-#if($column.columnName == $pk.columnName)
-@Id
-#else
-@Basic
-#end
+    #if($column.columnName == $pk.columnName)
+    @Id
+    #else
+    @Basic
+    #end
 @Column(name = "${column.columnName}")
-public ${column.attrType} get${column.attrName}() {
-    return $column.attrname;
+public ${column.attrType} get${column.attrName}(){
+  return $column.attrname;
   }
 
 public void set${column.attrName}(${column.attrType} ${column.attrname}) {
@@ -52,4 +52,4 @@ public void set${column.attrName}(${column.attrType} ${column.attrname}) {
 
 
 
-}
+  }

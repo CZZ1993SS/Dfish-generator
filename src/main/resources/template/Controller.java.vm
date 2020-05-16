@@ -26,7 +26,7 @@ import ${package}.${moduleName}.service.${className}Service;
  */
 @RequestMapping("${classname}")
 @Controller
-public class ${className}Controller extends FrameController{
+public class ${className}Controller extends FrameController {
 
 
     @Autowired
@@ -42,7 +42,7 @@ public class ${className}Controller extends FrameController{
 
         String ${pk.attrname} = request.getParameter("${pk.attrname}");
 
-        ${className}Model model = ${classname}Service.get(${pk.attrname});
+            ${className}Model model = ${classname}Service.get(${pk.attrname});
 
         return new JsonResponse(model);
     }
@@ -55,7 +55,7 @@ public class ${className}Controller extends FrameController{
     @ResponseBody
     public Object list(HttpServletRequest request) throws Exception {
         Pagination pagination = this.getPagination(request);
-        ${className}QueryParam param = new ${className}QueryParam();
+            ${className}QueryParam param = new ${className}QueryParam();
         this.bind(request, param);
         List<${className}Model> list = ${classname}Service.list(pagination, param);
         return new JsonResponse(list, pagination);
@@ -69,14 +69,14 @@ public class ${className}Controller extends FrameController{
     @ResponseBody
     public Object save(HttpServletRequest request) throws Exception {
         String ${pk.attrname} = request.getParameter("${pk.attrname}");
-        ${className}Model model = new ${className}Model();
+            ${className}Model model = new ${className}Model();
         this.bind(request, model);
         if (Utils.isEmpty(${pk.attrname})) {
-           // 保存
-           ${classname}Service.save(model);
+            // 保存
+                ${classname}Service.save(model);
         } else {
-           // 修改
-           ${classname}Service.update(model);
+            // 修改
+                ${classname}Service.update(model);
         }
         return new JsonResponse(model);
     }
