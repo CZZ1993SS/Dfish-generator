@@ -1,13 +1,24 @@
 server:
   port: 8080
 
-# mysql
+
 spring:
+
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.118.79:3306/sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: sms
-    password: RJ123sms
+
+    # mysql
+    #  driverClassName: com.mysql.jdbc.Driver
+    #  url: jdbc:mysql://192.168.118.81:3306/zhdj_zzdx?useUnicode=true&characterEncoding=utf-8
+    #  username: zhdj_zzdx
+    #  password: zhdj_zzdxRj123.
+
+    #oracle配置
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.118.78:1521:orcl
+    username: CTIMS
+    password: CTIMS
+
+
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -27,5 +38,5 @@ pagehelper:
 
 #指定数据库，可选值有【mysql、oracle、sqlserver、postgresql】
 dfish:
-  database: mysql
+  database: oracle
 

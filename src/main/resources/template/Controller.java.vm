@@ -1,6 +1,10 @@
 package ${package}.${moduleName}.controller;
 
-import java.util.List;
+
+import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.param.${className}Param;
+import ${package}.${moduleName}.service.${className}Service;
+import ${package}.result.ResponseResult;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,24 +13,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rongji.dfish.base.Pagination;
-import com.rongji.dfish.base.util.Utils;
-import com.rongji.dfish.frame.pub.controller.FrameController;
-import com.rongji.dfish.framework.mvc.response.JsonResponse;
-import ${package}.${moduleName}.model.${className}Model;
-import ${package}.${moduleName}.param.${className}QueryParam;
-import ${package}.${moduleName}.service.${className}Service;
 
 
 /**
- * ${comments}
+ * ${comments}控制层
  *
  * @author ${author}
  * @date ${datetime}
  */
-@RequestMapping("${classname}")
+@RequestMapping("/${classname}")
 @Controller
-public class ${className}Controller extends FrameController {
+public class ${className}Controller {
 
 
     @Autowired
@@ -34,63 +31,57 @@ public class ${className}Controller extends FrameController {
 
 
     /**
-     * 根据主键获取数据
-     */
+    * 查询
+    * tips: 单条
+    */
     @RequestMapping("/get")
     @ResponseBody
-    public Object get(HttpServletRequest request) {
-
-        String ${pk.attrname} = request.getParameter("${pk.attrname}");
-
-            ${className}Model model = ${classname}Service.get(${pk.attrname});
-
-        return new JsonResponse(model);
+    public Object get(HttpServletRequest request, String ${pk.attrname}) {
+        return ResponseResult.success(${classname}Service.get(${pk.attrname}));
     }
 
 
     /**
-     * 获取列表数据
+     * 查询
+     * tips: 列表
      */
     @RequestMapping("/list")
     @ResponseBody
-    public Object list(HttpServletRequest request) throws Exception {
-        Pagination pagination = this.getPagination(request);
-            ${className}QueryParam param = new ${className}QueryParam();
-        this.bind(request, param);
-        List<${className}Model> list = ${classname}Service.list(pagination, param);
-        return new JsonResponse(list, pagination);
+    public Object list(HttpServletRequest request, ${className}Param param) {
+        return ResponseResult.success(${classname}Service.list(param));
     }
 
 
+
     /**
-     * 增加/修改
-     */
+    * 新增
+    */
     @RequestMapping("/save")
     @ResponseBody
-    public Object save(HttpServletRequest request) throws Exception {
-        String ${pk.attrname} = request.getParameter("${pk.attrname}");
-            ${className}Model model = new ${className}Model();
-        this.bind(request, model);
-        if (Utils.isEmpty(${pk.attrname})) {
-            // 保存
-                ${classname}Service.save(model);
-        } else {
-            // 修改
-                ${classname}Service.update(model);
-        }
-        return new JsonResponse(model);
+    public Object save(HttpServletRequest request, ${className}Model vo) {
+        return ResponseResult.success(${classname}Service.save(vo));
     }
 
 
     /**
-     * 删除
-     */
+        * 删除
+        */
     @RequestMapping("/delete")
     @ResponseBody
-    public Object delete(HttpServletRequest request) throws Exception {
-        String ${pk.attrname} = request.getParameter("${pk.attrname}");
-        int result = ${classname}Service.delete(${pk.attrname});
-        return new JsonResponse(result);
+    public Object delete(HttpServletRequest request, String ${pk.attrname}) {
+        return ResponseResult.success(${classname}Service.delete(${pk.attrname}));
     }
+
+
+    /**
+     * 修改
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public Object update(HttpServletRequest request, ${className}Model vo) {
+        return ResponseResult.success(${classname}Service.update(vo));
+    }
+
+
 
 }
