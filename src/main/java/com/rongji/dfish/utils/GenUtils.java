@@ -35,6 +35,7 @@ public class GenUtils {
         //templates.add("template/Dao.java.vm");
         //templates.add("template/Service.java.vm");
         templates.add("template/Controller.java.vm");
+        templates.add("template/Mapper.java.vm");
         return templates;
     }
 
@@ -198,6 +199,10 @@ public class GenUtils {
 
         if (template.contains("Controller.java.vm")) {
             return packagePath + "controller" + File.separator + className + "Controller.java";
+        }
+
+        if (template.contains("Mapper.java.vm")) {
+            return packagePath + "mapper" + File.separator + className + ".java";
         }
 
         // if (template.contains("index.vue.vm")) {
