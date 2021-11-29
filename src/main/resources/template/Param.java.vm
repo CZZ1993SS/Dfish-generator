@@ -1,0 +1,13 @@
+package ${package}.${moduleName}.param;
+
+import ${package}.${moduleName}.model.${className}Model;
+
+
+/**
+ * ${comments}查询参数
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public class ${className}Param extends ${className}Model {
+}

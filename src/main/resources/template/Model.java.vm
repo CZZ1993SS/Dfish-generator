@@ -1,0 +1,14 @@
+package ${package}.${moduleName}.model;
+
+
+import ${package}.${moduleName}.entity.${className};
+
+
+/**
+ * ${comments} VO 类
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public class ${className}Model extends ${className} {
+}

@@ -1,90 +1,49 @@
 package ${package}.${moduleName}.service;
 
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.rongji.dfish.base.Pagination;
-import com.rongji.dfish.frame.pub.service.FrameService;
-import ${package}.${moduleName}.dao.${className}Dao;
-import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.model.${className}Model;
-import ${package}.${moduleName}.param.${className}QueryParam;
-
+import ${package}.${moduleName}.param.${className}Param;
+import java.util.List;
 
 
 /**
- * ${comments}
+ * ${comments}接口层
  *
  * @author ${author}
  * @date ${datetime}
  */
-@Service
-public class ${className}Service extends FrameService<${className}Model, ${className}, String> {
-
-    @Autowired
-    private ${className}Dao dao;
-
-    @Override
-    public ${className}Dao getDao() {
-        return dao;
-    }
-
-    public void setDao(${className}Dao dao) {
-        this.dao = dao;
-    }
-
+public interface ${className}Service {
 
     /**
-     * 根据主键获取数据
-     */
-    @Override
-    public ${className}Model get(String ${pk.attrname}) {
-        ${className} po = dao.get(${pk.attrname});
-        ${className}Model vo = null;
-        if (po != null) {
-            vo = this.parseVo(po);
-        }
-        return vo;
-    }
-
-
-    /**
-     * 获取列表数据
-     */
-    public List<${className}Model> list(Pagination pagination, ${className}QueryParam param) {
-        List<${className}> list = dao.listAll(pagination, param);
-        return this.parseVos(list);
-    }
-
-
-    /**
-     * 增加
-     */
-    @Override
-    public int save(${className}Model vo) {
-        vo.set${pk.attrName}(getNewId());
-        return getDao().save(parsePo(vo));
-    }
-
-
-    /**
-     * 更新
-     */
-    @Override
-    public int update(${className}Model vo) {
-        return getDao().update(parsePo(vo));
-    }
+         * 新增
+         */
+    int save(${className}Model vo);
 
 
     /**
      * 删除
      */
-    @Override
-    public int delete(String ${pk.attrname}) {
-        return getDao().delete(${pk.attrname});
-    }
+    int delete(String ${pk.attrname});
+
+
+    /**
+     * 修改
+     */
+    int update(${className}Model vo);
+
+
+    /**
+     * 查询
+     * tips；单条
+     */
+     ${className}Model get(String ${pk.attrname});
+
+
+    /**
+     * 查询
+     * tips；列表
+     */
+    List<${className}Model> list(${className}Param param);
 
 }
 
