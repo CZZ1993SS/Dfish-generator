@@ -32,12 +32,13 @@ public class GenUtils {
     private static List<String> getTemplates() {
         List<String> templates = new ArrayList<>();
         templates.add("template/Entity.java.vm");
-        //templates.add("template/Dao.java.vm");
         templates.add("template/Service.java.vm");
         templates.add("template/Controller.java.vm");
         templates.add("template/Mapper.java.vm");
         templates.add("template/Param.java.vm");
         templates.add("template/Model.java.vm");
+        templates.add("template/Impl.java.vm");
+        templates.add("template/Xml.xml.vm");
         return templates;
     }
 
@@ -190,11 +191,10 @@ public class GenUtils {
         if (template.contains("Entity.java.vm")) {
             return packagePath + "entity" + File.separator + className + ".java";
         }
-        //
-        // if (template.contains("Dao.java.vm")) {
-        //     return packagePath + "dao" + File.separator + className + "Dao.java";
-        // }
-        //
+
+        if (template.contains("Xml.xml.vm")) {
+            return packagePath + "xml" + File.separator + className + "Mapper.xml";
+        }
 
         if (template.contains("Service.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
@@ -214,6 +214,10 @@ public class GenUtils {
 
         if (template.contains("Param.java.vm")) {
             return packagePath + "param" + File.separator + className + "Param.java";
+        }
+
+        if (template.contains("Impl.java.vm")) {
+            return packagePath + "service" + File.separator + "impl" + File.separator + className + "Impl.java";
         }
 
         // if (template.contains("index.vue.vm")) {

@@ -31,8 +31,6 @@ public class ${className} {
 
 
 #end
-
-
 #foreach ($column in $columns)
 
     public ${column.attrType} get${column.attrName}(){

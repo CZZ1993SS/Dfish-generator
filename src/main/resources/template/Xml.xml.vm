@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package}.${moduleName}.mapper.${className}Mapper">
+
+    <resultMap id="${classname}Map" type="${package}.${moduleName}.entity.${className}">
+        #foreach ($column in $columns)
+            #if($column.columnName == $pk.columnName)
+                <id column="${column.columnName}" property="${column.attrname}" jdbcType="VARCHAR"/>
+            #else
+                <result column="${column.columnName}" property="${column.attrname}" jdbcType="VARCHAR"/>
+            #end
+        #end
+    </resultMap>
+
+
+    <insert id="save" parameterType="${package}.${moduleName}.model.${className}Model"></insert>
+
+
+    <delete id="delete" parameterType="java.lang.String"></delete>
+
+
+    <update id="update" parameterType="${package}.${moduleName}.model.${className}Model"></update>
+
+
+    <select id="get" resultMap="${className}Map" parameterType="java.lang.String">
+    </select>
+
+
+    <select id="list" resultMap="${className}Map" parameterType="${package}.${moduleName}.param.${className}">
+    </select>
+
+
+</mapper>

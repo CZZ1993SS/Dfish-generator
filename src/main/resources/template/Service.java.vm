@@ -15,8 +15,8 @@ import java.util.List;
 public interface ${className}Service {
 
     /**
-         * 新增
-         */
+     * 新增
+     */
     int save(${className}Model vo);
 
 

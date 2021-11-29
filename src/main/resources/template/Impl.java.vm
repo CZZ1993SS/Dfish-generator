@@ -1,0 +1,107 @@
+package ${package}.${moduleName}.service;
+
+
+import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.param.${className}Param;
+import ${package}.${moduleName}.service.${className}Service;
+import cn.gov.customs.h2018.ctims.utils.Utils;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+
+/**
+ * ${comments}服务实现层
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service("${classname}Service")
+public class ${className}Impl implements ${className}Service {
+
+
+    @Resource
+    private ${className}Mapper ${classname}Mapper;
+
+
+    /**
+     * 新增
+     */
+    @Override
+    public int save(${className}Model vo) {
+        return ${classname}Mapper.save(vo);
+    }
+
+
+    /**
+     * 删除
+     */
+    @Override
+    public int delete(String ${pk.attrname}) {
+        return ${classname}Mapper.delete(${pk.attrname});
+    }
+
+
+    /**
+     * 修改
+     */
+    @Override
+    public int update(${className}Model vo) {
+        return ${classname}Mapper.update(vo);
+    }
+
+
+    /**
+     * 查询
+     * tips；单条
+     */
+    @Override
+    public ${className}Model get(String ${pk.attrname}) {
+        ${className} po = ${classname}Mapper.get(${pk.attrname});
+        return this.parseVo(po);
+    }
+
+
+    /**
+     * 查询
+     * tips；列表
+     */
+    @Override
+    public List<${className}Model> list(${className}Param param) {
+        List<${className}> list = ${classname}Mapper.list(param);
+        return this.parseVos(list);
+    }
+
+
+    /**
+     * 解析
+     * tips；列表
+     */
+    private List<${className}Model> parseVos(List<${className}> pos) {
+        List<${className}Model> vos = new ArrayList<>();
+        for (${className} po : pos) {
+            vos.add(this.parseVo(po));
+        }
+        return vos;
+    }
+
+
+    /**
+     * 解析
+     * tips；单条
+     */
+    private ${className}Model parseVo(${className} po) {
+            ${className}Model vo = new ${className}Model();
+        Utils.copyPropertiesExact(vo, po);
+        return vo;
+    }
+
+
+
+}
+
