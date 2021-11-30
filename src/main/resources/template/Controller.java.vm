@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Copyright:   Copyright (c)2021
  * Company:     rongji
  *
- * @author: ${author}
- * @version: 1.0
+ * @author ${author}
+ * @version 1.0
  * Create at:   ${datetime}
  * <p>
  * Modification History:
