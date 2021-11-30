@@ -51,23 +51,14 @@
             type: "text",
             name: "author",
             value: ""
-        }, {
-            description: "生成前端",
-            type: "text",
-            name: "name",
-            value: ""
-        }, {
-            description: "支持Excel导入导出",
-            type: "text",
-            name: "age",
-            value: ""
         }],
-        submit: function(data) {
-            if(!data.pageName){
+
+        submit: function (data) {
+            if (!data.pageName) {
                 alert('请指定包名（pageName）');
                 return;
             }
-            if(!data.author){
+            if (!data.author) {
                 alert('请指定开发人员');
                 return;
             }
@@ -77,7 +68,8 @@
             }
             if (true) {
                 clearAllData("superDialog");
-                location.href = "generator/code?tables=" + tableNames.join() + "&author=" + data.author + "&pageName=" + data.pageName;
+                location.href = "generator/code?tables=" + tableNames.join() + "&author=" + data.author + "&pageName="
+                    + data.pageName + "&generateView=" + data.generateView;
             }
 
         }

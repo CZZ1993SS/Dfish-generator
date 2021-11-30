@@ -45,7 +45,7 @@ public class SysGeneratorController {
      * 生成代码
      */
     @RequestMapping("/code")
-    public void code(String tables, String author, String pageName, HttpServletResponse response) throws IOException {
+    public void code(String tables, String author, String pageName, String generateView, HttpServletResponse response) throws IOException {
         byte[] data = generatorService.generatorCode(tables.split(","), author, pageName);
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"" + pageName + ".zip" + "\"");
