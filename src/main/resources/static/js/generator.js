@@ -4,7 +4,6 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: '表名', name: 'tableName', width: 100, key: true},
-            {label: '引擎', name: 'engine', width: 70},
             {label: '表备注', name: 'tableComment', width: 100},
             {label: '创建时间', name: 'createTime', width: 100}
         ],
@@ -39,8 +38,7 @@ var vm = new Vue({
     el: '#rrapp',
     data: {
         q: {
-            tableName: null,
-            dialogVisible: false
+            tableName: null
         }
     },
     methods: {
@@ -48,7 +46,6 @@ var vm = new Vue({
         query: function () {
             $("#jqGrid").jqGrid('setGridParam', {
                 postData: {'tableName': vm.q.tableName},
-                dialogVisible: {'dialogVisible': vm.q.dialogVisible},
                 page: 1
             }).trigger("reloadGrid");
         }
