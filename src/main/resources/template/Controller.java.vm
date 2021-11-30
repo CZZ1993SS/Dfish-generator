@@ -71,8 +71,8 @@ public class ${className}Controller {
 
 
     /**
-        * 删除
-        */
+     * 删除
+     */
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(HttpServletRequest request, String ${pk.attrname}) {
