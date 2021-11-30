@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.service;
+package ${package}.${moduleName}.service.impl;
 
 
 import ${package}.${moduleName}.entity.${className};
