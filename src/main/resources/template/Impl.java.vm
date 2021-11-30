@@ -96,7 +96,7 @@ public class ${className}Impl implements ${className}Service {
      * tips；单条
      */
     private ${className}Model parseVo(${className} po) {
-            ${className}Model vo = new ${className}Model();
+        ${className}Model vo = new ${className}Model();
         Utils.copyPropertiesExact(vo, po);
         return vo;
     }
