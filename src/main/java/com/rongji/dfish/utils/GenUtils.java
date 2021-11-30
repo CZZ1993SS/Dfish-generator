@@ -203,8 +203,10 @@ public class GenUtils {
      */
     private static String getFileName(String template, String className, String packageName, String moduleName, Map<String, Object> map) {
         String packagePath = "main" + File.separator + "java" + File.separator;
+        String xmlPackagePath = "main" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName + File.separator;
+            xmlPackagePath += packageName.replace(".", File.separator) + File.separator;
         }
 
         if (template.contains("Entity.java.vm")) {
@@ -212,7 +214,7 @@ public class GenUtils {
         }
 
         if (template.contains("Xml.xml.vm")) {
-            return packagePath + map.get("moduleName") + File.separator + className + "Mapper.xml";
+            return xmlPackagePath + "xml" + File.separator + className + "Mapper.xml";
         }
 
         if (template.contains("Service.java.vm")) {
