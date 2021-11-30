@@ -120,6 +120,7 @@ public class GenUtils {
         map.put("className", tableEntity.getClassName());
         map.put("classname", tableEntity.getClassname());
         map.put("pathName", tableEntity.getClassname().toLowerCase());
+        conversionColumnType(tableEntity.getColumns());
         map.put("columns", tableEntity.getColumns());
         map.put("hasBigDecimal", hasBigDecimal);
         map.put("mainPath", mainPath);
@@ -171,11 +172,28 @@ public class GenUtils {
     }
 
 
+    private static void conversionColumnType(List<ColumnEntity> list) {
+        for (ColumnEntity column : list) {
+            column.setDataType(COLUMN_TYPE_MAP.get(column.getDataType()));
+        }
+    }
+
+
     /**
      * 列名转换成Java属性名
      */
     private static String columnToJava(String columnName) {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
+    }
+
+
+    public final static Map<String, String> COLUMN_TYPE_MAP = new HashMap<>();
+
+    static {
+        COLUMN_TYPE_MAP.put("VARCHAR2", "VARCHAR");
+        COLUMN_TYPE_MAP.put("CHAR", "VARCHAR");
+        COLUMN_TYPE_MAP.put("DATE", "TIMESTAMP");
+        COLUMN_TYPE_MAP.put("NUMBER", "NUMERIC");
     }
 
 
