@@ -147,7 +147,7 @@ public class GenUtils {
 
                 // 添加到zip
                 zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, tableEntity.getClassName(),
-                  config.getString("package"), pageName))));
+                  config.getString("package"), pageName, map))));
 
 
                 IOUtils.write(sw.toString(), zip, "UTF-8");
@@ -201,7 +201,7 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    private static String getFileName(String template, String className, String packageName, String moduleName) {
+    private static String getFileName(String template, String className, String packageName, String moduleName, Map<String, Object> map) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator + moduleName + File.separator;
@@ -212,7 +212,7 @@ public class GenUtils {
         }
 
         if (template.contains("Xml.xml.vm")) {
-            return packagePath + "xml" + File.separator + className + "Mapper.xml";
+            return packagePath + map.get("moduleName") + File.separator + className + "Mapper.xml";
         }
 
         if (template.contains("Service.java.vm")) {
