@@ -14,12 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
 /**
- * ${comments}控制层
+ * Description: ${comments}控制层
+ * Copyright:   Copyright (c)2021
+ * Company:     rongji
  *
- * @author ${author}
- * @date ${datetime}
+ * @author: ${author}
+ * @version: 1.0
+ * Create at:   ${datetime}
+ * <p>
+ * Modification History:
+ * Date         Author      Version     Description
+ * ------------------------------------------------------------------
+ * ${date}   ${author}        1.0       1.0 Version
  */
 @RequestMapping("/${classname}")
 @Controller

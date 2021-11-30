@@ -115,7 +115,6 @@ public class GenUtils {
         // 封装模板数据
         Map<String, Object> map = new HashMap<>();
         map.put("tableName", tableEntity.getTableName());
-        map.put("comments", tableEntity.getComments());
         map.put("pk", tableEntity.getPk());
         map.put("className", tableEntity.getClassName());
         map.put("classname", tableEntity.getClassname());
@@ -128,7 +127,9 @@ public class GenUtils {
         map.put("author", author);
         map.put("moduleName", pageName);
         map.put("email", config.getString("email"));
+        map.put("date", DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+        map.put("comments", tableEntity.getComments() == null ? "未知的表说明" : tableEntity.getComments());
         VelocityContext context = new VelocityContext(map);
 
         // 获取模板列表
