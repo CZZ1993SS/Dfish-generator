@@ -1,35 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>代码生成器</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="plugins/jqgrid/ui.jqgrid-bootstrap.css">
-<link rel="stylesheet" href="css/main.css">
-<script src="libs/jquery.min.js"></script>
-<script src="plugins/layer/layer.js"></script>
-<script src="libs/bootstrap.min.js"></script>
-<script src="libs/vue.min.js"></script>
-<script src="plugins/jqgrid/grid.locale-cn.js"></script>
-<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
-<script src="js/common.js"></script>
+    <title>代码生成器</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/dialog.css">
+    <script src="libs/jquery.min.js"></script>
+    <script src="plugins/layer/layer.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/vue.min.js"></script>
+    <script src="plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="plugins/jqgrid/dialog.min.js"></script>
+    <script src="js/common.js"></script>
 </head>
 <body>
 <div id="rrapp">
-	<div class="grid-btn">
-		<div class="form-group col-sm-2">
-			<input type="text" class="form-control" v-model="q.tableName" @keyup.enter="query" placeholder="表名">
-		</div>
-		<a class="btn btn-default" @click="query">查询</a>
-		<a class="btn btn-primary" @click="generator"><i class="fa fa-file-code-o"></i>&nbsp;生成代码</a>
-	</div>
+    <div class="grid-btn">
+        <div class="form-group col-sm-2">
+            <input type="text" class="form-control" v-model="q.tableName" @keyup.enter="query" placeholder="表名">
+        </div>
+        <a class="btn btn-default" @click="query">查询</a>
+        <a class="btn btn-primary" id="openDialog"><i class="fa fa-file-code-o"></i>&nbsp;生成代码</a>
+    </div>
     <table id="jqGrid"></table>
     <div id="jqGridPager"></div>
 </div>
 
 <script src="js/generator.js"></script>
+
+<script type="text/javascript">
+
+    $("#openDialog").dialog({
+        id: "superDialog",
+        title: "基本信息设置",
+        type: 0,
+        easyClose: true,
+        form: [{
+            description: "模块名(pageName)",
+            type: "text",
+            name: "pageName",
+            value: ""
+        }, {
+            description: "开发者(author)",
+            type: "text",
+            name: "author",
+            value: ""
+        }, {
+            description: "生成前端",
+            type: "text",
+            name: "name",
+            value: ""
+        }, {
+            description: "支持Excel导入导出",
+            type: "text",
+            name: "age",
+            value: ""
+        }],
+        submit: function(data) {
+            if(!data.pageName){
+                alert('请指定包名（pageName）');
+                return;
+            }
+            if(!data.author){
+                alert('请指定开发人员');
+                return;
+            }
+            var tableNames = getSelectedRows();
+            if (tableNames == null) {
+                return;
+            }
+            if (true) {
+                clearAllData("superDialog");
+                location.href = "generator/code?tables=" + tableNames.join() + "&author=" + data.author + "&pageName=" + data.pageName;
+            }
+
+        }
+    })
+
+</script>
+
 </body>
 </html>

@@ -58,8 +58,8 @@ public class GenUtils {
     /**
      * 生成代码
      */
-    public static void generatorCode(Map<String, String> table,
-                                     List<Map<String, String>> columns, ZipOutputStream zip) {
+    public static void generatorCode(Map<String, String> table, List<Map<String, String>> columns, ZipOutputStream zip,
+                                     String author, String pageName) {
         // 配置信息
         Configuration config = getConfig();
         boolean hasBigDecimal = false;
@@ -125,8 +125,8 @@ public class GenUtils {
         map.put("hasBigDecimal", hasBigDecimal);
         map.put("mainPath", mainPath);
         map.put("package", config.getString("package"));
-        map.put("moduleName", config.getString("moduleName"));
-        map.put("author", config.getString("author"));
+        map.put("author", author);
+        map.put("moduleName", pageName);
         map.put("email", config.getString("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
         VelocityContext context = new VelocityContext(map);
@@ -146,7 +146,7 @@ public class GenUtils {
 
                 // 添加到zip
                 zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, tableEntity.getClassName(),
-                  config.getString("package"), config.getString("moduleName")))));
+                  config.getString("package"), pageName))));
 
 
                 IOUtils.write(sw.toString(), zip, "UTF-8");

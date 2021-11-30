@@ -43,7 +43,7 @@ public class SysGeneratorService {
     }
 
 
-    public byte[] generatorCode(String[] tableNames) {
+    public byte[] generatorCode(String[] tableNames, String author, String pageName) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
 
@@ -53,7 +53,7 @@ public class SysGeneratorService {
             //查询列信息
             List<Map<String, String>> columns = queryColumns(tableName);
             //生成代码
-            GenUtils.generatorCode(table, columns, zip);
+            GenUtils.generatorCode(table, columns, zip, author, pageName);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
