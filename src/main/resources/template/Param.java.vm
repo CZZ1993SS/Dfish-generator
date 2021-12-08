@@ -1,5 +1,6 @@
 package ${package}.${moduleName}.param;
 
+import java.util.Date;
 
 /**
  * ${comments}查询参数
@@ -10,15 +11,51 @@ package ${package}.${moduleName}.param;
 public class ${className}Param extends BaseParam {
 
     #foreach ($column in $columns)
-        /**
-         * $column.comments
-         */
-        private $column.attrType $column.attrname;
+    #if($column.attrType == $dateType)
+
+    **
+     * $column.comments开始
+     */
+    private String ${column.attrname}Begin;
 
 
+    /**
+     * $column.comments结束
+     */
+    private String ${column.attrname}End;
+    #else
+    /**
+     * $column.comments
+     */
+    private $column.attrType $column.attrname;
+    #end
     #end
     #foreach ($column in $columns)
 
+        #if($column.attrType == $dateType)
+
+
+            public String get${column.attrName}Begin(){
+                return ${column.attrname}Begin;
+            }
+
+
+            public void set${column.attrName}Begin(String ${column.attrname}Begin) {
+                this.${column.attrname}Begin = ${column.attrname}Begin;
+            }
+
+
+            public String get${column.attrName}End(){
+                return ${column.attrname}End;
+            }
+
+
+            public void set${column.attrName}End(String ${column.attrname}End) {
+                this.${column.attrname}End = ${column.attrname}End;
+            }
+
+
+        #else
         public ${column.attrType} get${column.attrName}(){
             return $column.attrname;
         }
@@ -27,6 +64,8 @@ public class ${className}Param extends BaseParam {
         public void set${column.attrName}(${column.attrType} ${column.attrname}) {
             this.${column.attrname} = ${column.attrname};
         }
+        #end
+
 
     #end
 

@@ -48,9 +48,18 @@
         WHERE
         1 = 1
         #foreach ($column in $columns)
+            #if($column.attrType == $dateType)
+            <if test="param.${column.attrname}Begin != null">
+                <![CDATA[AND t.${column.columnName} >= to_date(#{param.${column.attrname}Begin} ,'YYYY-MM-DD')]]>
+            </if>
+             <if test="param.${column.attrname}End != null">
+                 <![CDATA[AND t.${column.columnName} <= to_date(#{param.${column.attrname}End} ,'YYYY-MM-DD') + 1]]>
+             </if>
+            #else
             <if test="param.${column.attrname} != null">
                 AND t.${column.columnName} = #{param.${column.attrname}}
             </if>
+            #end
         #end
     </select>
 

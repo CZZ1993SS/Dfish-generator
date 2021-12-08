@@ -125,6 +125,7 @@ public class GenUtils {
         map.put("mainPath", mainPath);
         map.put("package", config.getString("package"));
         map.put("author", author);
+        map.put("dateType", "Date");
         map.put("moduleName", pageName);
         map.put("email", config.getString("email"));
         map.put("date", DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
