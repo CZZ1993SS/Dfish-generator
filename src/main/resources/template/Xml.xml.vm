@@ -13,28 +13,7 @@
     </resultMap>
 
 
-    <insert id="save" parameterType="${package}.${moduleName}.model.${className}Model">
-           INSERT INTO ${tableName} (
-           #foreach ($column in $columns)
-               #if($velocityCount != $columns.size())
-               ${column.columnName},
-               #else
-               ${column.columnName}
-               #end
-           #end
-                ) VALUES (
-            #foreach ($column in $columns)
-               #if($velocityCount != $columns.size())
-               #{${column.attrname}, jdbcType=${column.dataType}},
-               #else
-               #{${column.attrname}, jdbcType=${column.dataType}}
-               #end
-            #end
-		   )
-    </insert>
-
-
-    <delete id="delete" parameterType="java.lang.String">
+    <delete id="deleteById" parameterType="java.lang.String">
        DELETE FROM
 			${tableName} t
 		WHERE
@@ -42,35 +21,35 @@
     </delete>
 
 
-    <update id="update" parameterType="${package}.${moduleName}.model.${className}Model">
+    <update id="updateById" parameterType="${package}.${moduleName}.model.${className}Model">
         UPDATE ${tableName} t
         <set>
            #foreach ($column in $columns)
-            <if test="${column.attrname} != null">
-                t.${column.columnName} = #{${column.attrname}},
+            <if test="param..${column.attrname} != null">
+                t.${column.columnName} = #{param.${column.attrname}},
             </if>
            #end
         </set>
         WHERE
-        t.$pk.columnName = #{${pk.attrname}}
+        t.$pk.columnName = #{param.${pk.attrname}}
     </update>
 
 
-    <select id="get" resultMap="${classname}Map" parameterType="java.lang.String">
+    <select id="selectById" resultMap="${classname}Map" parameterType="java.lang.String">
         SELECT * FROM
         ${tableName} t
         WHERE t.$pk.columnName = #{${pk.attrname}}
     </select>
 
 
-    <select id="list" resultMap="${classname}Map" parameterType="${package}.${moduleName}.param.${className}Param">
+    <select id="selectPage" resultMap="${classname}Map" parameterType="${package}.${moduleName}.param.${className}Param">
         SELECT *
         FROM ${tableName} t
         WHERE
         1 = 1
         #foreach ($column in $columns)
-            <if test="${column.attrname} != null">
-                AND t.${column.columnName} = #{${column.attrname}}
+            <if test="param.${column.attrname} != null">
+                AND t.${column.columnName} = #{param.${column.attrname}}
             </if>
         #end
     </select>

@@ -1,7 +1,5 @@
 package ${package}.${moduleName}.param;
 
-import ${package}.${moduleName}.model.${className}Model;
-
 
 /**
  * ${comments}查询参数
@@ -9,5 +7,27 @@ import ${package}.${moduleName}.model.${className}Model;
  * @author ${author}
  * @date ${datetime}
  */
-public class ${className}Param extends ${className}Model {
+public class ${className}Param extends BaseParam {
+
+    #foreach ($column in $columns)
+        /**
+         * $column.comments
+         */
+        private $column.attrType $column.attrname;
+
+
+    #end
+    #foreach ($column in $columns)
+
+        public ${column.attrType} get${column.attrName}(){
+            return $column.attrname;
+        }
+
+
+        public void set${column.attrName}(${column.attrType} ${column.attrname}) {
+            this.${column.attrname} = ${column.attrname};
+        }
+
+    #end
+
 }

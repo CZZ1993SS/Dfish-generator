@@ -2,14 +2,15 @@ package ${package}.${moduleName}.mapper;
 
 
 import ${package}.${moduleName}.entity.${className};
-import ${package}.${moduleName}.model.${className}Model;
 import ${package}.${moduleName}.param.${className}Param;
+import ${package}.${moduleName}.model.${className}Model;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 /**
@@ -18,40 +19,34 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author ${author}
  * @date ${datetime}
  */
-@Mapper
+@Component
 public interface ${className}Mapper extends BaseMapper<${className}> {
-
-
-    /**
-     * 新增
-     */
-    int save(${className}Model vo);
 
 
     /**
      * 删除
      */
-    int delete(@Param("${pk.attrname}") String ${pk.attrname});
+    int deleteById(@Param("${pk.attrname}") String ${pk.attrname});
 
 
     /**
      * 修改
      */
-    int update(${className}Model vo);
+    int updateById(@Param("param") ${className}Model vo);
 
 
     /**
      * 查询
      * tips；单条
      */
-    ${className} get(@Param("${pk.attrname}") String ${pk.attrname});
+     ${className} selectById(@Param("${pk.attrname}") String ${pk.attrname});
 
 
     /**
      * 查询
      * tips；列表
      */
-    List<${className}> list(${className}Param param);
+    List<${className}> selectPage(Page page, @Param("param") ${className}Param param);
 
 
 }
