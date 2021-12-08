@@ -1,9 +1,10 @@
 package ${package}.${moduleName}.service;
 
 
-import ${package}.${moduleName}.model.${className}Model;
 import ${package}.${moduleName}.param.${className}Param;
-import java.util.List;
+import ${package}.${moduleName}.model.${className}Model;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
 
 /**
@@ -14,36 +15,37 @@ import java.util.List;
  */
 public interface ${className}Service {
 
+
     /**
      * 新增
      */
-    int save(${className}Model vo);
+    int insert(${className}Model vo);
 
 
     /**
      * 删除
      */
-    int delete(String ${pk.attrname});
+    int deleteById(String ${pk.attrname});
 
 
     /**
      * 修改
      */
-    int update(${className}Model vo);
+    int updateById(${className}Model vo);
 
 
     /**
      * 查询
      * tips；单条
      */
-     ${className}Model get(String ${pk.attrname});
+     ${className}Model selectById(String ${pk.attrname});
 
 
     /**
      * 查询
      * tips；列表
      */
-    List<${className}Model> list(${className}Param param);
+    IPage<${className}Model> selectPage(${className}Param param);
 
 }
 

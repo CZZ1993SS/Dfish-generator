@@ -1,18 +1,23 @@
 package ${package}.${moduleName}.service.impl;
 
 
-import ${package}.${moduleName}.entity.${className};
+import cn.gov.customs.h2018.ctims.annotation.DataChangeAudit;
 import ${package}.${moduleName}.mapper.${className}Mapper;
-import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.param.${className}Param;
 import ${package}.${moduleName}.service.${className}Service;
+import ${package}.${moduleName}.model.${className}Model;
+import cn.gov.customs.h2018.ctims.utils.BeanUtil;
 import cn.gov.customs.h2018.ctims.utils.Utils;
+import cn.gov.customs.h2018.framework.core.exception.common.BusinessException;
+import cn.gov.customs.h2018.framework.core.exception.constant.ArgumentErrors;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 /**
@@ -25,16 +30,19 @@ import org.springframework.stereotype.Service;
 public class ${className}Impl implements ${className}Service {
 
 
-    @Resource
-    private ${className}Mapper ${classname}Mapper;
+    @Autowired
+    private ${className}Mapper mapper;
 
 
     /**
      * 新增
      */
     @Override
-    public int save(${className}Model vo) {
-        return ${classname}Mapper.save(vo);
+    @DataChangeAudit
+    public int insert(${className}Model vo) {
+        ${className} po = new ${className}();
+        BeanUtil.copyPropertiesExact(po, vo);
+        return mapper.insert(po);
     }
 
 
@@ -42,8 +50,13 @@ public class ${className}Impl implements ${className}Service {
      * 删除
      */
     @Override
+    @DataChangeAudit
     public int delete(String ${pk.attrname}) {
-        return ${classname}Mapper.delete(${pk.attrname});
+        if (Utils.isEmpty(${pk.attrname})) {
+            throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
+        } else {
+            return mapper.deleteById(${pk.attrname});
+        }
     }
 
 
@@ -51,8 +64,13 @@ public class ${className}Impl implements ${className}Service {
      * 修改
      */
     @Override
+    @DataChangeAudit
     public int update(${className}Model vo) {
-        return ${classname}Mapper.update(vo);
+        if (Utils.isEmpty(vo.get${pk.attrName}())) {
+            throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
+        } else {
+            return mapper.updateById(vo);
+        }
     }
 
 
@@ -61,9 +79,13 @@ public class ${className}Impl implements ${className}Service {
      * tips；单条
      */
     @Override
-    public ${className}Model get(String ${pk.attrname}) {
-        ${className} po = ${classname}Mapper.get(${pk.attrname});
-        return this.parseVo(po);
+    public ${className}Model selectById(String ${pk.attrname}) {
+        if (Utils.isEmpty(${pk.attrname})) {
+            throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
+        } else {
+            ${className} po = mapper.get(${pk.attrname});
+            return this.parseVo(po);
+        }
     }
 
 
@@ -72,9 +94,11 @@ public class ${className}Impl implements ${className}Service {
      * tips；列表
      */
     @Override
-    public List<${className}Model> list(${className}Param param) {
-        List<${className}> list = ${classname}Mapper.list(param);
-        return this.parseVos(list);
+    public Page<${className}Model> selectPage(${className}Param param) {
+        Page<${className}Model> page = new Page<>(param.getCurrent(), param.getSize());
+        List<${className}> list = mapper.selectPage(page, param);
+        page.setRecords(this.parseVos(list));
+        return page;
     }
 
 
