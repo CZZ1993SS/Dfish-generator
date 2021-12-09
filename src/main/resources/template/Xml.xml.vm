@@ -25,13 +25,13 @@
         UPDATE ${tableName} t
         <set>
            #foreach ($column in $columns)
-            <if test="param..${column.attrname} != null">
-                t.${column.columnName} = #{param.${column.attrname}},
+            <if test="et.${column.attrname} != null">
+                t.${column.columnName} = #{et.${column.attrname}},
             </if>
            #end
         </set>
         WHERE
-        t.$pk.columnName = #{param.${pk.attrname}}
+        t.$pk.columnName = #{et.${pk.attrname}}
     </update>
 
 

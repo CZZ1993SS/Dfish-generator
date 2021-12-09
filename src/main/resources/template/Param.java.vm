@@ -1,6 +1,7 @@
 package ${package}.${moduleName}.param;
 
-import java.util.Date;
+import cn.gov.customs.h2018.ctims.base.param.BaseParam;
+
 
 /**
  * ${comments}查询参数
@@ -13,7 +14,7 @@ public class ${className}Param extends BaseParam {
     #foreach ($column in $columns)
     #if($column.attrType == $dateType)
 
-    **
+    /**
      * $column.comments开始
      */
     private String ${column.attrname}Begin;
@@ -24,7 +25,7 @@ public class ${className}Param extends BaseParam {
      */
     private String ${column.attrname}End;
     #else
-    /**
+/**
      * $column.comments
      */
     private $column.attrType $column.attrname;
@@ -32,39 +33,39 @@ public class ${className}Param extends BaseParam {
     #end
     #foreach ($column in $columns)
 
-        #if($column.attrType == $dateType)
+    #if($column.attrType == $dateType)
 
 
-            public String get${column.attrName}Begin(){
-                return ${column.attrname}Begin;
-            }
+    public String get${column.attrName}Begin(){
+        return ${column.attrname}Begin;
+    }
 
 
-            public void set${column.attrName}Begin(String ${column.attrname}Begin) {
-                this.${column.attrname}Begin = ${column.attrname}Begin;
-            }
+    public void set${column.attrName}Begin(String ${column.attrname}Begin) {
+            this.${column.attrname}Begin = ${column.attrname}Begin;
+    }
 
 
-            public String get${column.attrName}End(){
-                return ${column.attrname}End;
-            }
+    public String get${column.attrName}End(){
+        return ${column.attrname}End;
+    }
 
 
-            public void set${column.attrName}End(String ${column.attrname}End) {
-                this.${column.attrname}End = ${column.attrname}End;
-            }
+    public void set${column.attrName}End(String ${column.attrname}End) {
+        this.${column.attrname}End = ${column.attrname}End;
+    }
 
 
-        #else
-        public ${column.attrType} get${column.attrName}(){
-            return $column.attrname;
-        }
+    #else
+public ${column.attrType} get${column.attrName}(){
+        return $column.attrname;
+    }
 
 
-        public void set${column.attrName}(${column.attrType} ${column.attrname}) {
-            this.${column.attrname} = ${column.attrname};
-        }
-        #end
+    public void set${column.attrName}(${column.attrType} ${column.attrname}) {
+        this.${column.attrname} = ${column.attrname};
+    }
+    #end
 
 
     #end

@@ -24,25 +24,6 @@ public interface ${className}Mapper extends BaseMapper<${className}> {
 
 
     /**
-     * 删除
-     */
-    int deleteById(@Param("${pk.attrname}") String ${pk.attrname});
-
-
-    /**
-     * 修改
-     */
-    int updateById(@Param("param") ${className}Model vo);
-
-
-    /**
-     * 查询
-     * tips；单条
-     */
-     ${className} selectById(@Param("${pk.attrname}") String ${pk.attrname});
-
-
-    /**
      * 查询
      * tips；列表
      */
