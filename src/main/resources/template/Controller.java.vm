@@ -2,6 +2,7 @@ package ${package}.${moduleName}.controller;
 
 
 import cn.gov.customs.h2018.ctims.annotation.Audit;
+import cn.gov.customs.h2018.ctims.constants.BaseConstants;
 import cn.gov.customs.h2018.ctims.result.ResponseResult;
 import ${package}.${moduleName}.param.${className}Param;
 import ${package}.${moduleName}.service.${className}Service;
@@ -47,9 +48,9 @@ public class ${className}Controller {
      */
     @RequestMapping(value = "/insert", method = {RequestMethod.POST})
     @ApiOperation(value = "${comments}新增")
-    @Audit(module = "${comments}", serverName = "ctims", describe = "新增${comments}")
-    @ApiImplicitParam(name = "sysDescTemplateModel", value = "${comments}对象", required = true,
-      dataType = "${className}Model", paramType = "form")
+    @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "新增${comments}")
+    @ApiImplicitParam(name = "${classname}Model", value = "${comments}对象", required = true,
+      dataType = "${className}Model", paramType = BaseConstants.PARAM_TYPE_FORM)
     public Object insert(HttpServletRequest request, ${className}Model vo) {
         return ResponseResult.success(service.insert(vo));
     }
@@ -60,9 +61,9 @@ public class ${className}Controller {
      */
     @RequestMapping(value = "/deleteById", method = {RequestMethod.GET})
     @ApiOperation(value = "${comments}删除")
-    @Audit(module = "${comments}", serverName = "ctims", describe = "删除${comments}")
+    @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "删除${comments}")
     @ApiImplicitParam(name = "${pk.attrname}", value = "${pk.comments}", required = true,
-      dataType = "string", paramType = "query")
+      dataType = BaseConstants.DATA_TYPE_STRING, paramType = BaseConstants.PARAM_TYPE_QUERY)
     public Object deleteById(HttpServletRequest request, String ${pk.attrname}) {
         return ResponseResult.success(service.deleteById(${pk.attrname}));
     }
@@ -73,8 +74,8 @@ public class ${className}Controller {
      */
     @RequestMapping(value = "/updateById", method = {RequestMethod.POST})
     @ApiOperation(value = "${comments}修改")
-    @Audit(module = "${comments}", serverName = "ctims", describe = "修改${comments}")
-    @ApiImplicitParam(name = "${classname}Model", value = "${comments}对象", required = true, dataType = "${className}Model", paramType = "form")
+    @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "修改${comments}")
+    @ApiImplicitParam(name = "${classname}Model", value = "${comments}对象", required = true, dataType = "${className}Model", paramType = BaseConstants.PARAM_TYPE_FORM)
     public Object updateById(HttpServletRequest request, ${className}Model vo) {
         return ResponseResult.success(service.updateById(vo));
     }

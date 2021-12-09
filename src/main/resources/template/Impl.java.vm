@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
 /**
@@ -27,7 +28,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @date ${datetime}
  */
 @Service("${classname}Service")
-public class ${className}Impl implements ${className}Service {
+public class ${className}Impl extends ServiceImpl<${className}Mapper, ${className}> implements ${className}Service {
 
 
     @Autowired
@@ -39,10 +40,11 @@ public class ${className}Impl implements ${className}Service {
      */
     @Override
     @DataChangeAudit
-    public int insert(${className}Model vo) {
+    public ${className}Model insert(${className}Model vo) {
         ${className} po = new ${className}();
         BeanUtil.copyPropertiesExact(po, vo);
-        return mapper.insert(po);
+        mapper.insert(po);
+        return this.parseVo(po);
     }
 
 
@@ -51,7 +53,7 @@ public class ${className}Impl implements ${className}Service {
      */
     @Override
     @DataChangeAudit
-    public int delete(String ${pk.attrname}) {
+    public int deleteById(String ${pk.attrname}) {
         if (Utils.isEmpty(${pk.attrname})) {
             throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
         } else {
@@ -65,7 +67,7 @@ public class ${className}Impl implements ${className}Service {
      */
     @Override
     @DataChangeAudit
-    public int update(${className}Model vo) {
+    public int updateById(${className}Model vo) {
         if (Utils.isEmpty(vo.get${pk.attrName}())) {
             throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
         } else {

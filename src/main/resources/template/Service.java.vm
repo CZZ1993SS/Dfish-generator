@@ -1,10 +1,10 @@
 package ${package}.${moduleName}.service;
 
-
 import ${package}.${moduleName}.param.${className}Param;
 import ${package}.${moduleName}.model.${className}Model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 
 /**
@@ -13,13 +13,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${className}Service {
+public interface ${className}Service extends IService<${className}> {
 
 
     /**
      * 新增
      */
-    int insert(${className}Model vo);
+    ${className}Model insert(${className}Model vo);
 
 
     /**

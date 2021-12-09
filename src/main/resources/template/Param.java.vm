@@ -35,7 +35,6 @@ public class ${className}Param extends BaseParam {
 
     #if($column.attrType == $dateType)
 
-
     public String get${column.attrName}Begin(){
         return ${column.attrname}Begin;
     }

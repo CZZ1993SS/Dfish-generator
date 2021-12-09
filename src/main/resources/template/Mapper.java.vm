@@ -3,7 +3,6 @@ package ${package}.${moduleName}.mapper;
 
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.param.${className}Param;
-import ${package}.${moduleName}.model.${className}Model;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
