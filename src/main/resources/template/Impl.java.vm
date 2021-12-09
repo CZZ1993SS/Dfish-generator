@@ -67,11 +67,14 @@ public class ${className}Impl extends ServiceImpl<${className}Mapper, ${classNam
      */
     @Override
     @DataChangeAudit
-    public int updateById(${className}Model vo) {
+    public ${className}Model updateById(${className}Model vo) {
         if (Utils.isEmpty(vo.get${pk.attrName}())) {
             throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
         } else {
-            return mapper.updateById(vo);
+            mapper.updateById(vo);
+            ${className}Model po = selectById(vo.get${pk.attrName}());
+            BeanUtil.copyPropertiesExactIfExists(po, vo);
+            return this.parseVo(po);
         }
     }
 

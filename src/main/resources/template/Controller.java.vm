@@ -51,7 +51,7 @@ public class ${className}Controller {
     @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "新增${comments}")
     @ApiImplicitParam(name = "${classname}Model", value = "${comments}对象", required = true,
       dataType = "${className}Model", paramType = BaseConstants.PARAM_TYPE_FORM)
-    public Object insert(HttpServletRequest request, ${className}Model vo) {
+    public ResponseResult<${className}Model> insert(HttpServletRequest request, ${className}Model vo) {
         return ResponseResult.success(service.insert(vo));
     }
 
@@ -64,7 +64,7 @@ public class ${className}Controller {
     @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "删除${comments}")
     @ApiImplicitParam(name = "${pk.attrname}", value = "${pk.comments}", required = true,
       dataType = BaseConstants.DATA_TYPE_STRING, paramType = BaseConstants.PARAM_TYPE_QUERY)
-    public Object deleteById(HttpServletRequest request, String ${pk.attrname}) {
+    public ResponseResult<Integer> deleteById(HttpServletRequest request, String ${pk.attrname}) {
         return ResponseResult.success(service.deleteById(${pk.attrname}));
     }
 
@@ -76,7 +76,7 @@ public class ${className}Controller {
     @ApiOperation(value = "${comments}修改")
     @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "修改${comments}")
     @ApiImplicitParam(name = "${classname}Model", value = "${comments}对象", required = true, dataType = "${className}Model", paramType = BaseConstants.PARAM_TYPE_FORM)
-    public Object updateById(HttpServletRequest request, ${className}Model vo) {
+    public ResponseResult<${className}Model> updateById(HttpServletRequest request, ${className}Model vo) {
         return ResponseResult.success(service.updateById(vo));
     }
 
@@ -87,7 +87,7 @@ public class ${className}Controller {
      */
     @RequestMapping(value = "/selectById", method = {RequestMethod.GET})
     @ApiOperation(value = "${comments}单条查询")
-    public Object selectById(HttpServletRequest request, String ${pk.attrname}) {
+    public ResponseResult<${className}Model> selectById(HttpServletRequest request, String ${pk.attrname}) {
         return ResponseResult.success(service.selectById(${pk.attrname}));
     }
 
@@ -98,7 +98,7 @@ public class ${className}Controller {
      */
     @RequestMapping(value = "/selectPage", method = {RequestMethod.GET})
     @ApiOperation(value = "${comments}列表查询")
-    public Object selectPage(HttpServletRequest request, ${className}Param param) {
+    public ResponseResult<${className}Model> selectPage(HttpServletRequest request, ${className}Param param) {
         return ResponseResult.success(service.selectPage(param));
     }
 

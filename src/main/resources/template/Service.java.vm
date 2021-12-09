@@ -32,7 +32,7 @@ public interface ${className}Service extends IService<${className}> {
     /**
      * 修改
      */
-    int updateById(${className}Model vo);
+     ${className}Model updateById(${className}Model vo);
 
 
     /**
