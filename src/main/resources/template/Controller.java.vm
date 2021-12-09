@@ -62,7 +62,7 @@ public class ${className}Controller {
     @RequestMapping(value = "/deleteById", method = {RequestMethod.GET})
     @ApiOperation(value = "${comments}删除")
     @Audit(module = "${comments}", serverName = BaseConstants.SERVER_NAME, describe = "删除${comments}")
-    @ApiImplicitParam(name = "${pk.attrname}", value = "${pk.comments}", required = true,
+    @ApiImplicitParam(name = "${pk.attrname}", value = "#if($pk.comments)$pk.comments#else主键#end$empty", required = true,
       dataType = BaseConstants.DATA_TYPE_STRING, paramType = BaseConstants.PARAM_TYPE_QUERY)
     public ResponseResult<Integer> deleteById(HttpServletRequest request, String ${pk.attrname}) {
         return ResponseResult.success(service.deleteById(${pk.attrname}));

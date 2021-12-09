@@ -126,6 +126,7 @@ public class GenUtils {
         map.put("package", config.getString("package"));
         map.put("author", author);
         map.put("dateType", "Date");
+        map.put("empty", "");
         map.put("moduleName", pageName);
         map.put("email", config.getString("email"));
         map.put("date", DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
@@ -211,7 +212,7 @@ public class GenUtils {
         }
 
         if (template.contains("Entity.java.vm")) {
-            return packagePath + "entity" + File.separator + className + ".java";
+            return packagePath + "model" + File.separator + className + ".java";
         }
 
         if (template.contains("Xml.xml.vm")) {
@@ -231,7 +232,7 @@ public class GenUtils {
         }
 
         if (template.contains("Model.java.vm")) {
-            return packagePath + "model" + File.separator + className + "Model.java";
+            return packagePath + "vo" + File.separator + className + "Model.java";
         }
 
         if (template.contains("Param.java.vm")) {

@@ -15,21 +15,22 @@ public class ${className}Param extends BaseParam {
     #if($column.attrType == $dateType)
 
     /**
-     * $column.comments开始
+     * #if($column.comments)$column.comments开始#else 时间开始 #end $empty
      */
     private String ${column.attrname}Begin;
 
 
     /**
-     * $column.comments结束
+     * #if($column.comments)$column.comments结束#else 时间结束 #end $empty
      */
     private String ${column.attrname}End;
-    #else
-/**
-     * $column.comments
+    #else $empty
+    /**
+     * #if($column.comments)$column.comments#else#end $empty
      */
     private $column.attrType $column.attrname;
     #end
+
     #end
     #foreach ($column in $columns)
 

@@ -26,9 +26,9 @@ public class ${className} {
 
 #foreach ($column in $columns)
     /**
-     * $column.comments
+     * #if($column.comments)$column.comments#else#end $empty
      */
-    @ApiModelProperty(value = "${column.comments}")
+    @ApiModelProperty(value = "#if($column.comments)$column.comments#else#end$empty")
     private $column.attrType $column.attrname;
 
 

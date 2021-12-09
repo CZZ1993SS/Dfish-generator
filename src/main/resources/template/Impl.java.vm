@@ -88,7 +88,7 @@ public class ${className}Impl extends ServiceImpl<${className}Mapper, ${classNam
         if (Utils.isEmpty(${pk.attrname})) {
             throw new BusinessException("${pk.attrname} 不能为空", ArgumentErrors.NOT_NULL_EMPTY.getErrorInfo().getCode(), null, null, null);
         } else {
-            ${className} po = mapper.get(${pk.attrname});
+            ${className} po = mapper.selectById(${pk.attrname});
             return this.parseVo(po);
         }
     }
