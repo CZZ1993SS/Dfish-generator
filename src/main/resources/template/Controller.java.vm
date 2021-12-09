@@ -6,7 +6,7 @@ import cn.gov.customs.h2018.ctims.constants.BaseConstants;
 import cn.gov.customs.h2018.ctims.result.ResponseResult;
 import ${package}.${moduleName}.param.${className}Param;
 import ${package}.${moduleName}.service.${className}Service;
-import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.vo.${className}Model;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

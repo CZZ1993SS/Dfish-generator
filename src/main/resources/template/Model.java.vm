@@ -1,7 +1,7 @@
-package ${package}.${moduleName}.model;
+package ${package}.${moduleName}.vo;
 
 
-import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.model.${className};
 
 
 /**

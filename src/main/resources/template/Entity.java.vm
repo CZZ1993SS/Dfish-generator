@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.entity;
+package ${package}.${moduleName}.model;
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;

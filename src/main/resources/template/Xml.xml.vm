@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${package}.${moduleName}.mapper.${className}Mapper">
 
-    <resultMap id="${classname}Map" type="${package}.${moduleName}.entity.${className}">
+    <resultMap id="${classname}Map" type="${package}.${moduleName}.model.${className}">
         #foreach ($column in $columns)
             #if($column.columnName == $pk.columnName)
                 <id column="${column.columnName}" property="${column.attrname}" jdbcType="${column.dataType}"/>
@@ -21,7 +21,7 @@
     </delete>
 
 
-    <update id="updateById" parameterType="${package}.${moduleName}.model.${className}Model">
+    <update id="updateById" parameterType="${package}.${moduleName}.vo.${className}Model">
         UPDATE ${tableName} t
         <set>
            #foreach ($column in $columns)

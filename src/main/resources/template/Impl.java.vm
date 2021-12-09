@@ -3,10 +3,10 @@ package ${package}.${moduleName}.service.impl;
 
 import cn.gov.customs.h2018.ctims.annotation.DataChangeAudit;
 import ${package}.${moduleName}.mapper.${className}Mapper;
-import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.model.${className};
 import ${package}.${moduleName}.param.${className}Param;
 import ${package}.${moduleName}.service.${className}Service;
-import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.vo.${className}Model;
 import cn.gov.customs.h2018.ctims.utils.BeanUtil;
 import cn.gov.customs.h2018.ctims.utils.Utils;
 import cn.gov.customs.h2018.framework.core.exception.common.BusinessException;

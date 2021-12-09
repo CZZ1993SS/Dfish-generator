@@ -1,7 +1,8 @@
 package ${package}.${moduleName}.service;
 
+import ${package}.${moduleName}.model.${className};
 import ${package}.${moduleName}.param.${className}Param;
-import ${package}.${moduleName}.model.${className}Model;
+import ${package}.${moduleName}.vo.${className}Model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
