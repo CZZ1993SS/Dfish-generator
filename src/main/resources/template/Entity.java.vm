@@ -11,6 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 
 /**
  * ${comments} PO 类
@@ -28,6 +30,8 @@ public class ${className} {
     /**
      * #if($column.comments)$column.comments#else#end $empty
      */
+    #if($column.columnName == $pk.columnName)$empty
+    @TableId#else#end$empty
     @ApiModelProperty(value = "#if($column.comments)$column.comments#else#end$empty")
     private $column.attrType $column.attrname;
 

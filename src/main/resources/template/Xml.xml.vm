@@ -13,53 +13,24 @@
     </resultMap>
 
 
-    <delete id="deleteById" parameterType="java.lang.String">
-       DELETE FROM
-			${tableName} t
-		WHERE
-			t.$pk.columnName = #{${pk.attrname}}
-    </delete>
-
-
-    <update id="updateById" parameterType="${package}.${moduleName}.vo.${className}Model">
-        UPDATE ${tableName} t
-        <set>
-           #foreach ($column in $columns)
-            <if test="et.${column.attrname} != null">
-                t.${column.columnName} = #{et.${column.attrname}},
-            </if>
-           #end
-        </set>
-        WHERE
-        t.$pk.columnName = #{et.${pk.attrname}}
-    </update>
-
-
-    <select id="selectById" resultMap="${classname}Map" parameterType="java.lang.String">
-        SELECT * FROM
-        ${tableName} t
-        WHERE t.$pk.columnName = #{${pk.attrname}}
-    </select>
-
-
     <select id="selectPage" resultMap="${classname}Map" parameterType="${package}.${moduleName}.param.${className}Param">
         SELECT *
         FROM ${tableName} t
         WHERE
-        1 = 1
+        1 = 1 $empty
         #foreach ($column in $columns)
-            #if($column.attrType == $dateType)
-            <if test="param.${column.attrname}Begin != null">
-                <![CDATA[AND t.${column.columnName} >= to_date(#{param.${column.attrname}Begin} ,'YYYY-MM-DD')]]>
-            </if>
-             <if test="param.${column.attrname}End != null">
-                 <![CDATA[AND t.${column.columnName} <= to_date(#{param.${column.attrname}End} ,'YYYY-MM-DD') + 1]]>
-             </if>
-            #else
-            <if test="param.${column.attrname} != null">
-                AND t.${column.columnName} = #{param.${column.attrname}}
-            </if>
-            #end
+        #if($column.attrType == $dateType)
+        <if test="param.${column.attrname}Begin != null">
+            <![CDATA[AND t.${column.columnName} >= to_date(#{param.${column.attrname}Begin} ,'YYYY-MM-DD')]]>
+        </if>
+         <if test="param.${column.attrname}End != null">
+             <![CDATA[AND t.${column.columnName} <= to_date(#{param.${column.attrname}End} ,'YYYY-MM-DD') + 1]]>
+         </if>
+        #else
+        <if test="param.${column.attrname} != null">
+            AND t.${column.columnName} = #{param.${column.attrname}}
+        </if>
+        #end
         #end
     </select>
 
