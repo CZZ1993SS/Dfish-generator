@@ -1,6 +1,7 @@
 package ${package}.${moduleName}.param;
 
 import cn.gov.customs.h2018.ctims.base.param.BaseParam;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -17,17 +18,20 @@ public class ${className}Param extends BaseParam {
     /**
      * #if($column.comments)$column.comments开始#else 时间开始 #end $empty
      */
+    @ApiModelProperty(value = "#if($column.comments)$column.comments开始#else#end$empty")
     private String ${column.attrname}Begin;
 
 
     /**
      * #if($column.comments)$column.comments结束#else 时间结束 #end $empty
      */
+    @ApiModelProperty(value = "#if($column.comments)$column.comments结束#else#end$empty")
     private String ${column.attrname}End;
     #else $empty
     /**
      * #if($column.comments)$column.comments#else#end $empty
      */
+    @ApiModelProperty(value = "#if($column.comments)$column.comments#else#end$empty")
     private $column.attrType $column.attrname;
     #end
 
